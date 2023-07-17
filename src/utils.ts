@@ -27,9 +27,11 @@ export const getDaysInMonth = (year: number, month: number): dayjs.Dayjs[] => {
     details.unshift(...append);
   }
 
-  if (lastDay.day() < 6) {
+  const lasts = 42 - details.length;
+
+  if (lasts > 0) {
     const append = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < lasts; i++) {
       const year = lastDay.year();
       const month = lastDay.month() + 1;
       const date = lastDay.date();

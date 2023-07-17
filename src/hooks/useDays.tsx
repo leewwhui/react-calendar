@@ -11,18 +11,11 @@ export const useDays = (
 
   const [year, setYear] = useState<number>(dayJS.year());
   const [month, setMonth] = useState<number>(dayJS.month());
-  const [date, setDate] = useState<number>(dayJS.date());
   const [days, setDays] = useState<dayjs.Dayjs[]>(getDaysInMonth(year, month));
 
-  const setDay = (
-    day?: dayjs.ConfigType,
-    format?: dayjs.OptionType,
-    strict?: boolean
-  ) => {
-    const dayJS = dayjs(day, format, strict);
-    setYear(dayJS.year());
-    setMonth(dayJS.month());
-    setDate(dayJS.day());
+  const setDay = (day: dayjs.Dayjs) => {
+    setYear(day.year());
+    setMonth(day.month());
   };
 
   useEffect(() => {
@@ -32,7 +25,6 @@ export const useDays = (
   return {
     year,
     month,
-    date,
     days,
     setDay,
   };

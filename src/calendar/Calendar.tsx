@@ -8,22 +8,24 @@ import dayjs from 'dayjs';
 export const CalendarContext = createContext<{
   year: number;
   month: number;
-  date: number;
   days: dayjs.Dayjs[];
 }>({
   year: 0,
   month: 0,
-  date: 0,
   days: [],
 });
 
 export const Calendar = () => {
-  const { year, month, date, days } = useDays();
+  const { year, month, days, setDay } = useDays();
+
+  const handleOnMouseChange = (day: dayjs.Dayjs) => {
+    setDay(day);
+  };
 
   return (
-    <CalendarContext.Provider value={{ year, month, date, days }}>
+    <CalendarContext.Provider value={{ year, month, days }}>
       <div className={styles['calendar-container']}>
-        <CalendarNav />
+        <CalendarNav onMonthChange={handleOnMouseChange} />
         <CalendarDays />
       </div>
     </CalendarContext.Provider>
