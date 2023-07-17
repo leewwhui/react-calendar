@@ -6,16 +6,21 @@ import dayjs from 'dayjs';
 const weeks = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 export const CalendarDays = () => {
-  const { days, month } = useContext(CalendarContext);
+  const { days, month, year, date } = useContext(CalendarContext);
 
   const cellStyle = styles['calendar-cell'];
   const dayRow = styles['calendar-day-row'];
 
   const getDayCellStyle = (day: dayjs.Dayjs) => {
+    const baseStyle = `${styles['calendar-day']} ${cellStyle}`;
+
     if (day.month() !== month) {
-      return `${styles['calendar-day']} ${cellStyle} ${styles['calendar-cell-disable']}`;
+      return `${baseStyle} ${styles['calendar-cell-disable']}`;
     }
-    return `${styles['calendar-day']} ${cellStyle}`;
+    if (day.month() === month && day.year() === year && day.date() === date) {
+      return `${baseStyle} ${styles['calendar-cell-active']}`;
+    }
+    return `${baseStyle} ${styles['calendar-cell-normal']}`;
   };
 
   return (
