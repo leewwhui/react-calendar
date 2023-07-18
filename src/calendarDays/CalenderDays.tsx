@@ -5,7 +5,12 @@ import dayjs from 'dayjs';
 
 const weeks = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-export const CalendarDays = () => {
+interface CalendarDaysProps {
+  selected: string[];
+}
+
+export const CalendarDays: FC<CalendarDaysProps> = props => {
+  const { selected } = props;
   const { days, month } = useContext(CalendarContext);
 
   const cellStyle = styles['calendar-cell'];
@@ -16,6 +21,10 @@ export const CalendarDays = () => {
 
     if (day.month() !== month) {
       return `${baseStyle} ${styles['calendar-cell-disable']}`;
+    }
+
+    if (selected.includes(`${day.year()}-${day.month()}-${day.date()}`)) {
+      return `${baseStyle} ${styles['calendar-cell-active']}`;
     }
 
     return `${baseStyle} ${styles['calendar-cell-normal']}`;

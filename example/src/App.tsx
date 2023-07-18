@@ -1,7 +1,7 @@
 import { Calendar } from '../../src/index';
 
 function App() {
-  return <Calendar></Calendar>;
+  return <Calendar selected={[new Date()]}></Calendar>;
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { FC, createContext, useMemo } from 'react';
 import styles from './Calendar.module.less';
 import { CalendarNav } from '../calendarNav/CalendarNav';
 import { CalendarDays } from '../calendarDays/CalenderDays';
@@ -15,8 +15,20 @@ export const CalendarContext = createContext<{
   days: [],
 });
 
-export const Calendar = () => {
+interface CalendarProps {
+  selected?: Date[];
+}
+
+export const Calendar: FC<CalendarProps> = props => {
   const { year, month, days, setDay } = useDays();
+
+  const selected = useMemo(() => {
+    const selected = props.selected || [];
+
+    return selected.map(
+      item => `${item.getFullYear()}-${item.getMonth()}-${item.getDate()}`
+    );
+  }, [props.selected]);
 
   const handleOnMouseChange = (day: dayjs.Dayjs) => {
     setDay(day);
@@ -26,7 +38,7 @@ export const Calendar = () => {
     <CalendarContext.Provider value={{ year, month, days }}>
       <div className={styles['calendar-container']}>
         <CalendarNav onMonthChange={handleOnMouseChange} />
-        <CalendarDays />
+        <CalendarDays selected={selected} />
       </div>
     </CalendarContext.Provider>
   );

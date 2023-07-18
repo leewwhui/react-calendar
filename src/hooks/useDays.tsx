@@ -8,7 +8,6 @@ export const useDays = (
   strict?: boolean
 ) => {
   const dayJS = dayjs(day, format, strict);
-
   const [year, setYear] = useState<number>(dayJS.year());
   const [month, setMonth] = useState<number>(dayJS.month());
   const [days, setDays] = useState<dayjs.Dayjs[]>(getDaysInMonth(year, month));
