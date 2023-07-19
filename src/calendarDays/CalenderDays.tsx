@@ -7,10 +7,11 @@ const weeks = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 interface CalendarDaysProps {
   selected: string[];
+  onClick: (day: dayjs.Dayjs, e: MouseEvent) => void;
 }
 
 export const CalendarDays: FC<CalendarDaysProps> = props => {
-  const { selected } = props;
+  const { selected, onClick } = props;
   const { days, month } = useContext(CalendarContext);
 
   const cellStyle = styles['calendar-cell'];
@@ -31,7 +32,14 @@ export const CalendarDays: FC<CalendarDaysProps> = props => {
   };
 
   const Day: FC<{ day: dayjs.Dayjs }> = ({ day }) => {
-    return <div className={getDayCellStyle(day)}>{day.date()}</div>;
+    return (
+      <div
+        className={getDayCellStyle(day)}
+        onClick={e => onClick(day, e.nativeEvent)}
+      >
+        {day.date()}
+      </div>
+    );
   };
 
   return (

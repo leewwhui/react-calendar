@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import styles from './CalendarNav.module.less';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { CalendarContext } from '../calendar/Calendar';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 const months = [
   'January',
