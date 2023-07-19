@@ -1,12 +1,10 @@
 import React, {
-  FC,
   createContext,
   useMemo,
   forwardRef,
   useImperativeHandle,
   useState,
   useEffect,
-  ForwardedRef,
 } from 'react';
 import styles from './Calendar.module.less';
 import { CalendarNav } from '../calendarNav/CalendarNav';
@@ -82,8 +80,6 @@ export const Calendar = forwardRef<CalenderRef, CalendarProps>((props, ref) => {
         setDay(prev('year'));
       },
       nextMonth() {
-        console.log('here');
-
         setDay(next('month'));
       },
       prevMonth() {
