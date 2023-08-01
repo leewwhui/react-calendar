@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getDaysInMonth } from '../utils';
 
 export const useDays = (
@@ -8,23 +8,33 @@ export const useDays = (
   strict?: boolean
 ) => {
   const dayJS = dayjs(day, format, strict);
-  const [year, setYear] = useState<number>(dayJS.year());
-  const [month, setMonth] = useState<number>(dayJS.month());
-  const [days, setDays] = useState<dayjs.Dayjs[]>(getDaysInMonth(year, month));
+
+  const [data, setData] = useState<{
+    year: number;
+    month: number;
+    days: dayjs.Dayjs[];
+  }>({
+    year: dayJS.year(),
+    month: dayJS.month(),
+    days: getDaysInMonth(dayJS.year(), dayJS.month()),
+  });
 
   const setDay = (day: dayjs.Dayjs) => {
-    setYear(day.year());
-    setMonth(day.month());
+    const year = day.year();
+    const month = day.month();
+    const days = getDaysInMonth(year, month);
+
+    setData({
+      year,
+      month,
+      days,
+    });
   };
 
-  useEffect(() => {
-    setDays(getDaysInMonth(year, month));
-  }, [year, month]);
-
   return {
-    year,
-    month,
-    days,
+    year: data.year,
+    month: data.month,
+    days: data.days,
     setDay,
   };
 };

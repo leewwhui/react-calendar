@@ -11,7 +11,7 @@ function App() {
   };
 
   const handleNextMonth = () => {
-    ref.current?.gotoDate(new Date())
+    ref.current?.nextMonth();
   };
 
   return (

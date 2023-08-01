@@ -3,8 +3,6 @@ import React, {
   useMemo,
   forwardRef,
   useImperativeHandle,
-  useState,
-  useEffect,
 } from 'react';
 import styles from './Calendar.module.less';
 import { CalendarNav } from '../calendarNav/CalendarNav';
@@ -39,17 +37,12 @@ export interface CalenderRef {
 
 export const Calendar = forwardRef<CalenderRef, CalendarProps>((props, ref) => {
   const { year, month, days, setDay } = useDays();
-  const [selected, setSelected] = useState<Date[]>([]);
   const { onDayClick } = props;
 
   const selectedDates = useMemo(() => {
-    return selected.map(
+    return (props.selected || []).map(
       item => `${item.getFullYear()}-${item.getMonth()}-${item.getDate()}`
     );
-  }, [selected]);
-
-  useEffect(() => {
-    setSelected(props.selected || []);
   }, [props.selected]);
 
   const next = (format: 'year' | 'month') => {
@@ -64,14 +57,13 @@ export const Calendar = forwardRef<CalenderRef, CalendarProps>((props, ref) => {
     ref,
     () => ({
       gotoDate(date: Date) {
-        setSelected([date]);
         setDay(dayjs(date));
       },
       today() {
         return dayjs();
       },
       getDates() {
-        return selected.map(dayjs);
+        return days;
       },
       nextYear() {
         setDay(next('year'));
@@ -86,7 +78,7 @@ export const Calendar = forwardRef<CalenderRef, CalendarProps>((props, ref) => {
         setDay(prev('month'));
       },
     }),
-    []
+    [year, month, days]
   );
 
   return (

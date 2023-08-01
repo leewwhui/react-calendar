@@ -14,6 +14,8 @@
   justify-content: center;
   font-weight: @font-weight-md;
   user-select: none;
+  cursor: pointer;
+  font-weight: @font-weight-sm;
 }
 
 .calendar-cell-disable {
@@ -41,24 +43,16 @@
 
 .calendar-days {
   flex: 1;
-  border: 1px solid @color-gray-1;
-
-  & > :not(:last-child) {
-    border-bottom: 1px solid @color-gray-1;
-  }
-}
-
-.calendar-day-row {
-  height: calc(100% / 6);
   display: flex;
-  box-sizing: border-box;
-
-  :not(:last-child) {
-    border-right: 1px solid @color-gray-1;
-  }
+  flex-wrap: wrap;
+  border-top: 1px solid @color-gray-1;
+  border-left: 1px solid @color-gray-1;
 }
 
 .calendar-day {
   cursor: pointer;
+  box-sizing: border-box;
   font-weight: @font-weight-sm;
+  border-bottom: 1px solid @color-gray-1;
+  border-right: 1px solid @color-gray-1;
 }

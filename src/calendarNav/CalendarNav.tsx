@@ -3,21 +3,7 @@ import styles from './CalendarNav.module.less';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { CalendarContext } from '../calendar/Calendar';
 import dayjs from 'dayjs';
-
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import { months } from '../common';
 
 interface CalendarNavProps {
   onMonthChange: (day: dayjs.Dayjs) => void;
