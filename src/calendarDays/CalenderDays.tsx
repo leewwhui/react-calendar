@@ -1,8 +1,8 @@
+import dayjs from 'dayjs';
+import { weeks } from '../common';
 import React, { FC, useContext } from 'react';
 import styles from './CalendarDays.module.less';
 import { CalendarContext } from '../calendar/Calendar';
-import dayjs from 'dayjs';
-import { weeks } from '../common';
 
 interface CalendarDaysProps {
   selected: string[];
