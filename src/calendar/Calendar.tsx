@@ -37,13 +37,13 @@ export interface CalenderRef {
 
 export const Calendar = forwardRef<CalenderRef, CalendarProps>((props, ref) => {
   const { year, month, days, setDay } = useDays();
-  const { onDayClick } = props;
+  const { onDayClick, selected = [] } = props;
 
   const selectedDates = useMemo(() => {
-    return (props.selected || []).map(
+    return selected.map(
       item => `${item.getFullYear()}-${item.getMonth()}-${item.getDate()}`
     );
-  }, [props.selected]);
+  }, [selected]);
 
   const next = (format: 'year' | 'month') => {
     return dayjs(`${year}-${month + 1}`).add(1, format);

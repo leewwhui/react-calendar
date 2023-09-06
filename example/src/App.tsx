@@ -4,20 +4,15 @@ import { useRef, useState } from 'react';
 import { CalenderRef } from '../../src/calendar/Calendar';
 
 function App() {
-  const [days, setDays] = useState<Date[]>([]);
+  const [days, setDays] = useState<Date[]>([new Date()]);
   const ref = useRef<CalenderRef>(null);
   const handleDayClick = (day: dayjs.Dayjs) => {
     setDays([day.toDate()]);
   };
 
-  const handleNextMonth = () => {
-    ref.current?.nextMonth();
-  };
-
   return (
     <div>
       <Calendar selected={days} onDayClick={handleDayClick} ref={ref} />
-      <button onClick={handleNextMonth}>next month</button>
     </div>
   );
 }
